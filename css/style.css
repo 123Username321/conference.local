@@ -1,0 +1,218 @@
+/* COMMON */
+body {
+    margin: 0;
+    width: 100%;
+}
+ul {
+    list-style: none;
+}
+h6 {
+    font-weight: 500;
+}
+.access-denied {
+    margin: 0.6rem;
+    text-align: center;
+}
+.access-denied h4 {
+    color: red;
+}
+.central {
+    width: 1200px;
+    margin: 0 auto;
+}
+.centered {
+    text-align: center;
+}
+.error-msg {
+    color: red;
+    margin: 0.4rem 0;
+}
+.info-msg {
+    color: green;
+    margin: 0.4rem 0;
+}
+.header {
+    text-align: center;
+    margin: 0.6rem 0;
+}
+.highlighted-text {
+    color: #FF8F00;
+}
+.action-result {
+    width: 100%;
+    text-align: center;
+    margin: 1em 0;
+}
+main {
+    background-color: rgba(255, 255, 255, 0);
+    padding-top: 64px;
+}
+
+
+/* HEADER */
+header {
+    width: 100%;
+    background-color: #0097A7;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2), -1px -1px 2px rgba(0, 0, 0, 0.2);
+    position: fixed;
+}
+header section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+}
+header h2 {
+    margin: 0;
+    transform: skewX(-25deg);
+}
+header ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+header ul li {
+    display: inline;
+    font-size: 1.3rem;
+    padding-left: 0.5rem;
+}
+header a {
+    color: white;
+    text-decoration: none;
+}
+header a:hover {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+/* LOGIN & REGISTER */
+.back-container {
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    text-shadow: none;
+    color: black;
+}
+.back-container > .form {
+    background-color: white;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 1em;
+    border-radius: 8px;
+}
+.logreg {
+    width: 500px;
+}
+.input-block {
+    display: flex;
+    flex-direction: column;
+    margin: 14px 0;
+}
+.input-line-block {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin: 14px 0;
+}
+.input-line-block * {
+    margin: 0;
+}
+.input-line-block *:first-child {
+    margin-right: 0.4rem;
+}
+.input-block textarea {
+    resize: none;
+    height: 6rem;
+}
+.input-block select {
+    width: 100%;
+}
+.send-actions {
+    display: flex;
+    flex-direction: row-reverse;
+}
+.send-actions * {
+    margin: 0 0 0 8px;
+}
+.form-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* REPORT LIST */
+.list-item {
+    width: 100%;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    margin: 0 0 1.6em 0;
+    text-align: left;
+}
+.list-item > .header {
+    text-align: left;
+    font-weight: bold;
+    margin: 0 0 0.1rem 0;
+}
+.list-item > .category {
+    color: #616161;
+    font-size: 0.8rem;
+    margin-bottom: 0;
+}
+.list-item > .description {
+    margin: 0.6rem 0;
+}
+.list-item .footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.list-item .speaker-info * {
+    margin: 0;
+}
+
+
+/* REPORT INFO */
+.report-info div {
+    margin: 0.6rem 0;
+}
+.report-info .line-info {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+.report-info .block-info {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+}
+.report-info .block-info p {
+    margin: 0;
+}
+.report-info .tr-info {
+    display: flex; 
+    align-items: baseline; 
+    justify-content: space-between;
+}
+.report-info .tr-info h6 {
+    margin: 0 0.2rem 0 0;
+    font-weight: bolder;
+}
+.report-info td button {
+    margin: 0.25rem 0;
+}
+.report-footer {
+    display: flex;
+    justify-content: center;
+}
