@@ -1,9 +1,8 @@
 <?php
-
-require_once 'user.php';
-require_once 'psql_config.php';
-
 session_start();
+
+require_once $_SERVER['DOCUMENT_ROOT'].'/model/main.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/model/database.php';
 
 ?>
 
@@ -11,11 +10,11 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-    <?php require_once 'chunks/head.html'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'].'/chunks/head.php'; ?>
     <title><?= "Подробнее"; ?></title>
 </head>
 <body>
-    <?php require_once 'chunks/header.html' ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'].'/chunks/header.php' ?>
     
     <?php if (!isUser() || !isset($_GET['id'])): ?>
         <main class="central">
@@ -27,8 +26,12 @@ session_start();
 
     <?php else: ?>
         <main class="central">
-            <?php 
-                $report = $_SESSION['user']->getDetailedReport($_GET['id']);
+            <?php
+            $db = new Database();
+            if (!$db->connect()) {
+                die("Ошибка подключения к БД");
+            }
+            $report = $db->getReport($_GET['id'], $_SESSION['id'], $_SESSION['access_level']);
             ?>
 
             <?php if (is_array($report)): ?>
@@ -54,14 +57,14 @@ session_start();
                         <tr class="tr-info">
                             <td><h6><?= "Файл выступления: " ?></h6></td>
                             <td>
-                                <?= '<a href="download.php?report_id='.$report["report_id"].'&file=speech"><button class="btn btn-info">Скачать</button></a>' ?>
+                                <?= '<a href="/actions/download.php?report_id='.$report["report_id"].'&file=speech"><button class="btn btn-info">Скачать</button></a>' ?>
                             </td>
                         </tr>
 
                         <tr class="tr-info">
                             <td><h6><?= "Файл презентации: " ?></h6></td>
                             <td>
-                                <?= '<a href="download.php?report_id='.$report["report_id"].'&file=present"><button class="btn btn-info">Скачать</button></a>' ?>
+                                <?= '<a href="/actions/download.php?report_id='.$report["report_id"].'&file=present"><button class="btn btn-info">Скачать</button></a>' ?>
                             </td>
                         </tr>
                     </table>
@@ -82,9 +85,3 @@ session_start();
     <?php endif; ?>
 </body>
 </html>
-
-<?php
-
-unset($_SESSION['report']);
-
-?>

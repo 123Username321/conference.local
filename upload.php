@@ -1,8 +1,8 @@
 <?php
-
-require_once 'user.php';
-
 session_start();
+
+require_once $_SERVER['DOCUMENT_ROOT'].'/model/main.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/model/database.php';
 
 ?>
 
@@ -10,11 +10,11 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-    <?php require_once 'chunks/head.html'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'].'/chunks/head.php'; ?>
     <title>Добавить заявку</title>
 </head>
 <body>
-    <?php require_once 'chunks/header.html'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'].'/chunks/header.php'; ?>
     
     <main class="central">
         <?php if (!isUser()): ?>

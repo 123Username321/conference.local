@@ -1,8 +1,8 @@
 <?php
-
-require_once 'user.php';
-
 session_start();
+
+require_once $_SERVER['DOCUMENT_ROOT'].'/model/main.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/model/database.php';
 
 ?>
 
@@ -10,22 +10,21 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-    <?php require_once 'chunks/head.html'; ?>
-    <?php 
-        if (isUser()) {
-            if ($_SESSION['user']->getAccessLevel() === 1) $title = "Список моих докладов";
-            else if ($_SESSION['user']->getAccessLevel() === 0) $title = "Список всех докладов";
-        }
-        else $title = "Главная";
+    <?php require_once $_SERVER['DOCUMENT_ROOT'].'/chunks/head.php'; ?>
+    <?php
+    if (isUser()) {
+        $title = "Список докладов";
+    } else {
+        $title = "Главная";
+    }
     ?>
     <title><?= $title; ?></title>
         
 </head>
 <body>
-    <?php require_once 'chunks/header.html'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'].'/chunks/header.php'; ?>
 
     <?php if (!isUser()): ?>
-
         <main class="central">
             <div class="centered">
                 <h3 class="highlighted-text">Добро пожаловать на сайт конференции <b>IT-Con 2020</b></h3>
@@ -52,24 +51,20 @@ session_start();
         </main>
 
     <?php else: ?>
-
         <main class="central">
-
             <div>
-                <?php if ($_SESSION['user']->getAccessLevel() === 1): ?>
-                <h4 class="header highlighted-text">Список моих докладов</h4>
-
-                <?php elseif ($_SESSION['user']->getAccessLevel() === 0): ?>
-                <h4 class="header highlighted-text">Список всех докладов</h4>
-
-                <?php endif; ?>
+                <h4 class="header highlighted-text">Список докладов</h4>
             </div>
 
-            <?php 
-                $reports = $_SESSION['user']->getReports();
-                if (count($reports) === 0 || $reports === false || $reports === null) {
-                    echo '<h6 class="centered">Заявок ещё нет</h6>';
-                }
+            <?php
+            $db = new Database();
+            $db->connect();
+            $reports = $db->getAllReports($_SESSION['id'], $_SESSION['access_level']);
+            if (count($reports) === 0) {
+                echo '<h6 class="centered">Заявок ещё нет</h6>';
+            } elseif ($reports === false || $reports === null) {
+                echo '<h6 class="centered">Ошибка БД</h6>';
+            }
             ?>
 
             <div class="report-list">
@@ -90,7 +85,6 @@ session_start();
                 <?php endfor; ?>
             </div>
 
-            
             <div class="centered">
                 <a href="upload.php"><button class="btn btn-info">Добавить заявку</button></a>
             </div>
@@ -99,5 +93,3 @@ session_start();
     <?php endif; ?>
 </body>
 </html>
-
-

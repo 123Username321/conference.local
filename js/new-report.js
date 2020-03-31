@@ -13,30 +13,30 @@ $('#upload-files-button').on('click', function(event) {
     formdata.append('userfiles[]', fileInputs[1].files[0]);
     
     $.ajax({
-        url: 'upload-action.php',
+        url: '/actions/upload-action.php',
         data: formdata,
         type: 'POST',
         dataType: 'json',
         processData: false,
         contentType: false,
-        success: function(responce) {
+        success: function(response) {
             $('#report-form h6.info-msg').remove();
-            if (responce.is_error === false) {
+            if (response.is_error === false) {
                 $('#report-form').remove();
                 $('main').append('<div class="action-result" id="report-action-result"></div>');
                 $('#report-action-result').append('<h5>Заявка успешно добавлена</h5>');
                 $('#report-action-result').append('<a href="index.php"><button class="btn btn-info">Вернуться</button></a>');
             }
             else {
-                if (responce.error != null) {
-                    $('#login-status').append(`<h6 class="error-msg">${responce.error}</h6>`);
+                if (response.error != null) {
+                    $('#login-status').append(`<h6 class="error-msg">${response.error}</h6>`);
                 }
                 else {
-                    for (var key in responce.data) {
-                        let parent = $(responce.data[key].field).parent();
+                    for (var key in response.data) {
+                        let parent = $(response.data[key].field).parent();
                         
-                        for (var err_key in responce.data[key].err_msg) {
-                            parent.append(`<h6 class="error-msg">${responce.data[key].err_msg[err_key]}</h6>`);
+                        for (var err_key in response.data[key].err_msg) {
+                            parent.append(`<h6 class="error-msg">${response.data[key].err_msg[err_key]}</h6>`);
                         }
                     }
                 }
