@@ -73,6 +73,11 @@ if (strlen($response['data'][2]['value']) < 6) {
     array_push($response['data'][2]['err_msg'], 'Пароль должен содержать как минимум 6 символов');
 }
 
+if (preg_match("/^[0-9]+$/u", $response['data'][2]['value']) == 1) {
+    $response['is_error'] = true;
+    array_push($response['data'][2]['err_msg'], 'Пароль не может состоять только из цифр');
+}
+
 
 if ($response['is_error'] === true) {
     die(json_encode($response));
